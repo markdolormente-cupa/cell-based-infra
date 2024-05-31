@@ -18,7 +18,7 @@ provider "aws" {
 }
 
 module "cell" {
-  source           = "../../../cell"
+  source           = "../../modules/cell"
   
   sg_name          = "dummy-cell-sg"
   sg_description   = "Allow HTTP inbound traffic"
