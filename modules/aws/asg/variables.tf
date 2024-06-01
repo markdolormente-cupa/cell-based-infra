@@ -6,7 +6,7 @@ variable "name" {
 variable "lg_name" {
   description = "The name for launch configuration"
   type        = string
-  default      = ""
+  default     = ""
 }
 
 variable "ami_id" {
@@ -58,7 +58,7 @@ variable "subnet_ids" {
 
 variable "target_group_arns" {
   description = "Target group assigned to asg"
-  type = set(string)
-  default = []
+  type        = set(string)
+  default     = []
 }
 

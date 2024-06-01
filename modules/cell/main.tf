@@ -10,17 +10,17 @@ data "aws_subnets" "default" {
 }
 
 module "security_group" {
-  source        = "../aws/security_group"
+  source = "../aws/security-group"
 
-  name          = var.sg_name
-  description   = var.sg_description
-  vpc_id        = data.aws_vpc.default.id
+  name        = var.sg_name
+  description = var.sg_description
+  vpc_id      = data.aws_vpc.default.id
 
   ingress_rules = var.sg_ingress_rules
 
-  egress_rules  = var.sg_egress_rules
+  egress_rules = var.sg_egress_rules
 
-  tags          = var.sg_tags
+  tags = var.sg_tags
 }
 
 module "alb" {
@@ -36,15 +36,15 @@ module "alb" {
   tg_health_check_unhealthy_threshold = var.tg_health_check_unhealthy_threshold
   tg_health_check_matcher             = var.tg_health_check_matcher
 
-  alb_name                            = var.alb_name
-  alb_internal                        = var.alb_internal
-  alb_subnet_ids                      = data.aws_subnets.default.ids
-  alb_security_group_ids              = [ module.security_group.id ]
+  alb_name               = var.alb_name
+  alb_internal           = var.alb_internal
+  alb_subnet_ids         = data.aws_subnets.default.ids
+  alb_security_group_ids = [module.security_group.id]
 
-  listener_port                       = var.listener_port
-  listener_protocol                   = var.listener_protocol
+  listener_port     = var.listener_port
+  listener_protocol = var.listener_protocol
 
-  depends_on = [ module.security_group ]
+  depends_on = [module.security_group]
 }
 
 module "asg" {
@@ -58,10 +58,10 @@ module "asg" {
   max_size           = var.asg_max_size
   desired_capacity   = var.asg_desired_capacity
   subnet_ids         = data.aws_subnets.default.ids
-  security_group_ids = [ module.security_group.id ]
-  target_group_arns  = [ module.alb.tg_arn ]
+  security_group_ids = [module.security_group.id]
+  target_group_arns  = [module.alb.tg_arn]
 
-  depends_on         = [ module.alb, module.security_group ]
+  depends_on = [module.alb, module.security_group]
 }
 
 output "dns_name" {

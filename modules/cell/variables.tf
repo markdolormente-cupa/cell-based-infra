@@ -16,30 +16,30 @@ variable "sg_vpc_id" {
 
 variable "sg_ingress_rules" {
   description = "A list of ingress rules"
-  type        = list(object({
+  type = list(object({
     from_port   = number
     to_port     = number
     protocol    = string
     cidr_blocks = list(string)
   }))
-  default     = []
+  default = []
 }
 
 variable "sg_egress_rules" {
   description = "A list of egress rules"
-  type        = list(object({
+  type = list(object({
     from_port   = number
     to_port     = number
     protocol    = string
     cidr_blocks = list(string)
   }))
-  default     = []
+  default = []
 }
 
 variable "sg_tags" {
   description = "A map of tags to assign to the resource"
   type        = map(string)
-  default    = {}
+  default     = {}
 }
 
 variable "asg_name" {
@@ -50,7 +50,7 @@ variable "asg_name" {
 variable "lg_name" {
   description = "The name for launch configuration"
   type        = string
-  default      = ""
+  default     = ""
 }
 
 variable "asg_ami_id" {

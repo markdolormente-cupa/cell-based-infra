@@ -5,7 +5,7 @@ resource "aws_launch_configuration" "this" {
   instance_type   = var.instance_type
   security_groups = var.security_group_ids
 
-  user_data       = var.user_data
+  user_data = var.user_data
 
   lifecycle {
     create_before_destroy = true
@@ -31,5 +31,5 @@ resource "aws_autoscaling_group" "this" {
     create_before_destroy = true
   }
 
-  depends_on = [ aws_launch_configuration.this ]
+  depends_on = [aws_launch_configuration.this]
 }
